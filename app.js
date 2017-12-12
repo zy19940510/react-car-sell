@@ -142,15 +142,17 @@ app.get("/carimages/:chexing", function (req, res) {
     var chexing = req.params.chexing;
     // console.log(chexing)
     fs.readdir("./www/carimages/" + chexing, function (err, data) {
-        console.log(data)
+        // console.log(data)
         data.forEach((color) => {
             dajson[color] = {};
             // console.log(color)
             var data2 = fs.readdirSync("./www/carimages/" + chexing + "/" + color);
-
+            // console.log(data2);
             data2.forEach((album) => {
                 var data3 = fs.readdirSync("./www/carimages/" + chexing + "/" + color + "/" + album);
                 dajson[color][album] = data3;
+            // console.log(data3)
+            
             });
         });
 
