@@ -1,0 +1,7 @@
+# dependencies
+/node_modules
+
+# production
+/www/dist
+/www/carimages
+.DS_Store
