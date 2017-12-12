@@ -140,12 +140,12 @@ app.get("/carimages/:chexing", function (req, res) {
     var dajson = {};
 
     var chexing = req.params.chexing;
-    console.log(chexing)
+    // console.log(chexing)
     fs.readdir("./www/carimages/" + chexing, function (err, data) {
         console.log(data)
         data.forEach((color) => {
             dajson[color] = {};
-            console.log(color)
+            // console.log(color)
             var data2 = fs.readdirSync("./www/carimages/" + chexing + "/" + color);
 
             data2.forEach((album) => {
