@@ -8,18 +8,15 @@ class App extends React.Component {
   constructor({ }) {
     super();
   }
-
   //点击页码条、改变每页多少条都会做的事情
   changeHandler(pagination, filters, sorter) {
     this.props.changepage(pagination.current, pagination.pageSize, sorter.field, sorter.order);
   }
-
   clickHandler(directory, colorEnglish){
     this.props.changeXuanfu(true);
     this.props.changeChexing(directory);
     this.props.changeColor(colorEnglish);
   }
-
   render() {
     // console.log(this.props)
     //定义列名
@@ -140,7 +137,6 @@ export default connect(
   }),
   (dispatch) => ({
     changepage(page, pagesize, field, order) {
-      
       dispatch({ "type": "carpicker/changepage", page, pagesize, field, order });
     },
     changeColor(color){

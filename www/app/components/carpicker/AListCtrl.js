@@ -7,7 +7,6 @@ import {connect} from "dva";
 class AListCtrl extends Component {
     constructor(props) {
         super();
-
         this.state = {
             showMore: false,
         }
@@ -25,15 +24,13 @@ class AListCtrl extends Component {
 
         if (_filter) { var value = _filter.value };
 
-        if (!this.props.data) return <div></div>
-		// let series = this.props.data
-		// console.log(this.props.data)
-		// console.log(Object.keys(special))
+        if (!this.props.data) return <div></div>   //这里是因为第一次render里面没有数据，第二次才有，可以做成loading
         return (
             <div className="a_list_ctrl_box">
                 <Row>
                     <Col span={22}>
                         {
+                            //把special里面的枚举成a标签
                             this.props.data.special.map((item, index) => {
                                 return <a
                                     key={index}
@@ -48,10 +45,12 @@ class AListCtrl extends Component {
                         <a href="javascript:void(0);" onClick={() => { this.setState({ "showMore": !this.state.showMore }) }}>更多</a>
                     </Col>
                 </Row>
+                
                   <Row>
                      <Col span={22}>
                          <div className="more_box" style={{ "display": this.state.showMore ? "block" : "none" }}>
                              {
+                                 //更多,利用Object.keys把all里面的属性传入数组
                                 Object.keys(this.props.data.all).map((item, index) => {
                                     return <dl key={index}>
                                         <dt>{item}</dt>

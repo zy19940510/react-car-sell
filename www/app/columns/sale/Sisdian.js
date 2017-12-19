@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import App from "../../App";
-// import SaleLayout from './SaleLayout';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Sider } = Layout;
 

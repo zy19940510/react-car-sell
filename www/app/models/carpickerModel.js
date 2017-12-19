@@ -1,8 +1,9 @@
 export default {
     namespace: "carpicker" , 
+    //details代表页面上筛选器默认的信息，filter代表筛选内容就是说对那些信息进行筛选
     state : {
         "details" : [],
-        "filter" : [] , 
+        "filter" : [], 
         "results" : [],
         "amount" : 0 ,
         "page" : 1,
@@ -26,13 +27,13 @@ export default {
             }
         },
         addtag_sync(state, { tagname, value, words}){
-            var isEixt = false; // 是否存在
+            var isEixt = false; // 先判断这个tag是否存在
             state.filter.forEach((item)=>{
                 if(item.tagname == tagname) isEixt = true;
             });
 
             if (!isEixt){
-                //增加
+                //不存在就增加，每次筛选都让page变为1
                 return {
                     ...state,
                     "filter": [
@@ -46,7 +47,7 @@ export default {
                     "page" : 1
                 }
             }else{
-                //修改
+                //存在就修改
                 return {
                     ...state,
                     "filter": state.filter.map(item => {
@@ -59,7 +60,7 @@ export default {
                     }),
                     "page": 1
                 }
-            } 
+            }
         },
         changeResult_sync(state , {results , amount}){
             return {
@@ -85,20 +86,18 @@ export default {
             const filter = yield select(state=>state.carpicker.filter);
             const {page,pagesize,sortby,sortDirec} = yield select(state=>state.carpicker);
 
-            //查询对象
+            //基础查询对象
             var queryobj = {
                 page : 1,
                 pagesize,
                 sortby,
                 sortDirec
             }
-
-            //遍历已经有的筛选器
+            //遍历已经有的筛选器，第一次一个都没有
             filter.forEach((item)=>{
-                //根据你的action的tagname，加查询对象的键
+                //根据你的action的tagname，壮大查询对象，有多少item就会增加多少属性
                 addQueryobjKey(item.tagname , item.value , queryobj)
             });
-
             //加一次本次的
             addQueryobjKey(tagname , value , queryobj);
 
@@ -110,30 +109,28 @@ export default {
                 }
                 return arr.join("&");
             })();
-
+            //每次增加tag都是通过查询字符串获取经过筛选的数据，后端返回的数据已经是筛选好的了
             const {results , amount} = yield fetch("/api?" + querystring).then(data=>data.json());
-
-            //两个put
+            //两个put，第一个
             yield put({"type" : "addtag_sync" , tagname , value , words});
             yield put({ "type": "changeResult_sync", results, amount});
         },
-        //拉取默认数据
+        //拉取table默认数据
         *fetchInit(action , {put,select}){
+            //select是effects对象的api，用于获取state
             const { page, pagesize } = yield select(state=>state.carpicker);
             const {results , amount} = yield fetch(`/api?page=${page}&pagesize=${pagesize}`).then(data=>data.json());
-            yield put({ "type": "changeResult_sync", results, amount});
+            yield put({ "type": "changeResult_sync", results, amount});   //发起一个 action 
         },
-        *fetchInit2(action , {put,select}){
+        //拉取筛选器的默认数据
+        *fetchInit2(action , {put}){
             const result = yield fetch('../app/result.json').then(data => data.json());
-			// console.log(result)
 			yield put({'type' : 'init' , result})
         },
         *deltag(action , {put , select}){
             //在异步的effect中得到state，要使用select函数：
             const filter = yield select(state=>state.carpicker.filter);
-
             const { page, pagesize, sortby, sortDirec } = yield select(state => state.carpicker);
-
             //查询对象
             var queryobj = {
                 page,
@@ -141,7 +138,6 @@ export default {
                 sortby,
                 sortDirec
             }
-
             //遍历已经有的筛选器
             filter.forEach((item)=>{
                 if(item.tagname != action.tagname){

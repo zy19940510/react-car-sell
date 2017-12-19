@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import App from "../../App";
-// import SaleLayout from './SaleLayout';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Sider } = Layout;
 
@@ -8,23 +6,24 @@ const { Header, Content, Sider } = Layout;
 import CarPicker from "../../components/carpicker";
 import CarShow from "../../components/CarShow";
 import CloseBtn from "../../ui-components/CloseBtn";
-
+import "../../styles/less_carpicker.less";
+import "../../styles/less_carshow.less";
+import "../../styles/less.less";
 
 export default class Dabiao extends Component {
   constructor() {
     super();
+    //默认配置是隐藏悬浮展示框和艾瑞泽车系
     this.state = {
       "showXuanfu": false,
       "chexing": "AiRuize"
     }
   }
-
   changeXuanfu(boolean) {
     this.setState({
       "showXuanfu": boolean
     })
   }
-
   changeChexing(str) {
     this.setState({
       "chexing": str
@@ -44,7 +43,6 @@ export default class Dabiao extends Component {
                 changeXuanfu={this.changeXuanfu.bind(this)}
                 changeChexing={this.changeChexing.bind(this)}
               ></CarPicker>
-
               {/* 悬浮层 */}
               <div className="xuanfu" style={{ "display": this.state.showXuanfu ? "block" : "none" }}>
                 <div className="cover"></div>

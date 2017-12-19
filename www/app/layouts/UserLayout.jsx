@@ -5,24 +5,9 @@ import { Link, Route } from 'dva/router';
 import DocumentTitle from 'react-document-title';
 import { Icon } from 'antd';
 import styles from '../styles/UserLayout.less';
-
-// const links = [{
-//   title: '帮助',
-//   href: '',
-// }, {
-//   title: '隐私',
-//   href: '',
-// }, {
-//   title: '条款',
-//   href: '',
-// }];
-
-const copyright = <div>Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品</div>;
-
 class UserLayout extends React.Component {
   constructor(props){
     super()
-    // props.dispatch({"type" : "login/checklogin"})
   }
     static childContextTypes ={
       location: PropTypes.object,
@@ -53,10 +38,10 @@ class UserLayout extends React.Component {
             <div className="headero">
               <Link to="/">
                 <img alt="" className="logoo"/>
-                <span className="title">张宇的项目</span>
+                <span className="title">好快省</span>
               </Link>
             </div>
-            <div className="desc">这是一个相当牛逼的项目！</div>
+            <div className="desc">解放您的双手</div>
           </div>
           {
             getRouteData('UserLayout').map(item =>
@@ -70,7 +55,6 @@ class UserLayout extends React.Component {
               )
             )
           }
-          {/* <GlobalFooter className={styles.footer} links={links} copyright={copyright} /> */}
         </div>
       </DocumentTitle>
     );

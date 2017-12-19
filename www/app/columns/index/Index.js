@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
-
-// import App from "../../App";
-// import Bar from "./Bar.js";
 export default class Index extends Component {
     constructor() {
         super();
 
         this.state = {
-            "r": 100,
-            "g": 200,
-            "b": 123,
             "shuju": []
         }
 
@@ -30,7 +24,6 @@ export default class Index extends Component {
         $("#myul, #myultool").sortable({
             connectWith: ".myul"
         }).disableSelection();
-
         //图表
         this.myChart = echarts.init(this.refs.main);
     }
@@ -159,36 +152,12 @@ export default class Index extends Component {
         });
 
     }
-
     render() {
         return (
                 <div>
                     <h1>我是首页</h1>
-
-
                     <div ref="main" style={{ "width": "300px", "height": "200px" }}></div>
-
-                   
                 </div>
-
         )
     }
 }
-// import React, { Component } from 'react'
-// import { connect } from 'dva'
-
-// export class Index extends Component {
-  
-
-//   render() {
-//     return (
-//       <div>
-//         <h1>哈哈</h1>
-//       </div>
-//     )
-//   }
-// }
-
-
-
-// export default connect(null, null)(Index)

@@ -1,9 +1,6 @@
 import React from "react";
 import classnames from "classnames";
 import { connect } from "dva";
-
- 
-
 //引入我们的控件组件
 import TabCtrl from "./TabCtrl.js";
 import AListCtrl from "./AListCtrl.js";
@@ -14,9 +11,6 @@ import SelectCtrl from "./SelectCtrl.js";
 import Tags from "./Tags.js";
 //引入表格组件
 import MyTable from "./MyTable.js";
-import '../../styles/less_carpicker.less'
-
- 
 class CarPicker extends React.Component {
     constructor({fetchInit , fetchInit2}) {
         super();
@@ -33,16 +27,14 @@ class CarPicker extends React.Component {
             brand
         })
     }
-
     //增加tag
     addtag(tagname,value,words) {
         this.props.addtag(tagname, value, words);
     }
-
     render() {
 		var series = {};
 		if(this.props.details[0]){
-			var {carbrands,biansuxiang , cartype , color , engine , km , paifang , price , seat } = this.props.details[0];
+			var {carbrands,biansuxiang, cartype , color , engine , km , paifang , price , seat } = this.props.details[0];
 			series = this.props.details[0].series;
 		}
         return <div>
@@ -56,13 +48,13 @@ class CarPicker extends React.Component {
                                 </td>
                                 <td>
                                     <TabCtrl 
-										data={this.props.details[0] && this.props.details[0].carbrands
-										} 
-                                        tagname="品牌" 
+										data={this.props.details[0] && this.props.details[0].carbrands} //显示a-z各有哪些品牌
+                                        tagname="品牌"
                                         addtag={this.addtag.bind(this)}
-                                        changebrand={this.changebrand.bind(this)}
+                                        changebrand={this.changebrand.bind(this)}  //通过它和AListCtrl通讯
                                     >
 									{
+                                    //a-z
 									this.props.details[0] &&this.props.details[0].carbrands	
 									}
 									</TabCtrl>
@@ -74,7 +66,7 @@ class CarPicker extends React.Component {
                                 </td>
                                 <td>
 									<AListCtrl 
-										data={series[this.state.brand]}
+										data={series[this.state.brand]} //显示有哪些车系,因为一上来brand为空所以不显示
 										tagname="车系" 
 									 	addtag={this.addtag.bind(this)}
 									>
@@ -149,16 +141,12 @@ class CarPicker extends React.Component {
 
                     <br/>
                     <br/>
-                    
                     <Tags></Tags>
-
                     <br />
                     <br />
                 </div>
             </div>
-
             <div className="cl"></div>
-
             <MyTable 
                 changeXuanfu={this.props.changeXuanfu}
                 changeChexing={this.props.changeChexing}

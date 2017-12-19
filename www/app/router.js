@@ -7,31 +7,6 @@ import cloneDeep from 'lodash/cloneDeep';
 import { getNavData } from './common/nav';
 import { getPlainNode } from './utils';
 
-import Index from "./columns/index/Index";
-import Login from "./routes/User/Login.js";
-import Register from "./routes/User/Register.js";
-import SaleIndex from "./columns/sale/SaleIndex";
-import OrderIndex from "./columns/order/OrderIndex";
-import PeopleIndex from "./columns/people/PeopleIndex";
-import Dabiao from "./columns/sale/Dabiao";
-import Sousuo from "./columns/sale/Sousuo";
-import Sisdian from "./columns/sale/Sisdian";
-
-// export default ({history}) => {
-//     return <Router history={history}>
-//        <div>
-//             <Route path="/" exact component={Index} />
-//             <Route path="/login" exact component={Login} />
-//             <Route path="/regist" exact component={Register} />
-//             <Route path="/sale" exact component={SaleIndex} />
-//             <Route path="/sale/dabiao" component={Dabiao} />
-//             <Route path="/sale/sousuo" component={Sousuo} />
-//             <Route path="/sale/sisdian" component={Sisdian} />
-            
-//             <Route path="/people" component={PeopleIndex} />
-//        </div>
-//     </Router>
-// }
 dynamic.setDefaultLoadingComponent(() => {
     return <Spin size="large" className="globalSpin" />;
   });
@@ -73,12 +48,12 @@ dynamic.setDefaultLoadingComponent(() => {
     };
   
     return (
-      <LocaleProvider locale={zhCN}>
+      //国际化CN代表国语
+      <LocaleProvider locale={zhCN}> 
         <Router history={history}>
             <Switch>
                 <Route path="/user" render={props => <UserLayout {...props} {...passProps} />} />
                 <Route path="/"  render={props => <BasicLayout {...props} {...passProps} />} />
-                {/* <Route path="/api" exact component={Index} /> */}
             </Switch>
         </Router>
       </LocaleProvider>

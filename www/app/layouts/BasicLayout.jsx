@@ -9,11 +9,7 @@ import groupBy from 'lodash/groupBy';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import Debounce from 'lodash-decorators/debounce';
-// import HeaderSearch from '../components/HeaderSearch';
-// import NoticeIcon from '../components/NoticeIcon';
-// import GlobalFooter from '../components/GlobalFooter';
-// import NotFound from '../routes/Exception/404';
-import   '../styles/BasicLayout.less';
+import '../styles/BasicLayout.less';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -285,7 +281,7 @@ export class BasicLayout extends Component {
           <div className="logo">
             <Link to="/">
               <img src="../../images/logo.svg" />
-              <h1>张宇的项目</h1>
+              <h1>好快省</h1>
             </Link>
           </div>
           <Menu
@@ -307,47 +303,6 @@ export class BasicLayout extends Component {
               onClick={this.toggle}
             />
             <div className="right">
-              {/* <HeaderSearch
-                className={`${styles.action} ${styles.search}`}
-                placeholder="站内搜索"
-                dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
-                onSearch={(value) => {
-                  console.log('input', value); // eslint-disable-line
-                }}
-                onPressEnter={(value) => {
-                  console.log('enter', value); // eslint-disable-line
-                }}
-              />
-              <NoticeIcon
-                className={styles.action}
-                count={currentUser.notifyCount}
-                onItemClick={(item, tabProps) => {
-                  console.log(item, tabProps); // eslint-disable-line
-                }}
-                onClear={this.handleNoticeClear}
-                onPopupVisibleChange={this.handleNoticeVisibleChange}
-                loading={fetchingNotices}
-                popupAlign={{ offset: [20, -16] }}
-              >
-                <NoticeIcon.Tab
-                  list={noticeData['通知']}
-                  title="通知"
-                  emptyText="你已查看所有通知"
-                  emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
-                />
-                <NoticeIcon.Tab
-                  list={noticeData['消息']}
-                  title="消息"
-                  emptyText="您已读完所有消息"
-                  emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
-                />
-                <NoticeIcon.Tab
-                  list={noticeData['待办']}
-                  title="待办"
-                  emptyText="你已完成所有待办"
-                  emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
-                />
-              </NoticeIcon> */}
               {currentUser.name ? (
                 <Dropdown overlay={menu}>
                   <span className="action account">
@@ -373,30 +328,8 @@ export class BasicLayout extends Component {
                     )
                   )
                 }
-                {/* <Redirect exact from="/" to="/dashboard/analysis" /> */}
-                {/* <Route component={NotFound} /> */}
               </Switch>
             </div>
-            {/* <GlobalFooter
-              links={[{
-                title: 'Pro 首页',
-                href: 'http://pro.ant.design',
-                blankTarget: true,
-              }, {
-                title: 'GitHub',
-                href: 'https://github.com/ant-design/ant-design-pro',
-                blankTarget: true,
-              }, {
-                title: 'Ant Design',
-                href: 'http://ant.design',
-                blankTarget: true,
-              }]}
-              copyright={
-                <div>
-                  Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品
-                </div>
-              }
-            /> */}
           </Content>
         </Layout>
       </Layout>
